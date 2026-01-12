@@ -81,3 +81,9 @@ h1 {
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
+
+.materia.aprobada {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
