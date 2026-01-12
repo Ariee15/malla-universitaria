@@ -1,6 +1,6 @@
 body {
   font-family: system-ui, sans-serif;
-  background: #f4f6f8;
+  background: #f4eea9;
   padding: 20px;
 }
 
@@ -14,13 +14,24 @@ h1 {
   color: var(--title);
 }
 
-.year h2 {
-  color: var(--title);
-}
-
+.year h2,
 .year h3 {
   color: var(--title);
-  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+.pensum {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.year {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
 .malla {
@@ -33,75 +44,57 @@ h1 {
 .materia {
   padding: 12px;
   border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* ---------- ESTADOS BASE ---------- */
+.materia:not(.bloqueada):not(.aprobada) {
   background: #ffffff;
   border: 2px solid #ddd;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.3s;
 }
 
-.materia:hover {
-  transform: scale(1.02);
+.semestre-2 .materia:not(.bloqueada):not(.aprobada),
+.semestre-3 .materia:not(.bloqueada):not(.aprobada),
+.semestre-4 .materia:not(.bloqueada):not(.aprobada),
+.semestre-5 .materia:not(.bloqueada):not(.aprobada),
+.semestre-6 .materia:not(.bloqueada):not(.aprobada),
+.semestre-7 .materia:not(.bloqueada):not(.aprobada),
+.semestre-8 .materia:not(.bloqueada):not(.aprobada),
+.semestre-verano .materia:not(.bloqueada):not(.aprobada) {
+  background: #f4cbc6;
+  border: 2px solid #f4afab;
 }
 
-/* estados */
-.aprobada {
-  background: #f49cbb;
-  border: 2px solid #f26a8d;
-  color: #4a0d24;
+/* ---------- APROBADA ---------- */
+.materia.aprobada {
+  background: #f49cbb !important;
+  border: 2px solid #f26a8d !important;
   text-decoration: line-through;
   font-weight: 600;
+  color: #4a0d24;
 }
 
-.bloqueada {
-  background: #e0e0e0;
+/* ---------- BLOQUEADA ---------- */
+.materia.bloqueada {
+  background: #e0e0e0 !important;
+  border: 2px dashed #aaa !important;
   color: #777;
   cursor: not-allowed;
-  border-style: dashed;
-}
-
-.pensum {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  align-items: flex-start;
-}
-
-.materia.bloqueada {
-  background: #e0e0e0;
-  color: #888;
-  cursor: not-allowed;
   pointer-events: none;
-  border: 2px dashed #aaa;
+  text-decoration: none !important;
 }
 
-.year {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-}
-
-.materia.aprobada {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
+/* ---------- DESBLOQUEO VISUAL ---------- */
 .materia.desbloqueada {
   background: #f4cbc6;
   border: 2px solid #f4afab;
-  color: #5a1a2b;
-  font-weight: 600;
+  animation: glow 0.8s ease;
 }
 
 @keyframes glow {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
