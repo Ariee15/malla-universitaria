@@ -1,24 +1,35 @@
-const materias = document.querySelectorAll(".materia");
+const materias = document.querySelectorAll('.materia');
 
-function estaDesbloqueada(materia) {
-  const prereq = materia.dataset.prereq;
-  if (!prereq) return true;
+// inicializar bloqueo
+function actualizarBloqueos() {
+  materias.forEach(materia => {
+    const prereq = materia.dataset.prereq;
 
-  return prereq.split(",").every(id => {
-    const m = document.querySelector(`[data-id="${id.trim()}"]`);
-    return m && m.classList.contains("aprobada");
+    if (!prereq) return;
+
+    const prereqs = prereq.split(',');
+    const cumplidos = prereqs.every(id => {
+      const mat = document.querySelector(`[data-id="${id.trim()}"]`);
+      return mat && mat.classList.contains('aprobada');
+    });
+
+    if (!cumplidos && !materia.classList.contains('aprobada')) {
+      materia.classList.add('bloqueada');
+    } else {
+      materia.classList.remove('bloqueada');
+    }
   });
 }
 
+// click en materias
 materias.forEach(materia => {
-  materia.addEventListener("click", () => {
-    if (materia.classList.contains("aprobada")) return;
+  materia.addEventListener('click', () => {
+    if (materia.classList.contains('bloqueada')) return;
 
-    if (!estaDesbloqueada(materia)) {
-      alert("⚠️ No cumples los prerrequisitos");
-      return;
-    }
-
-    materia.classList.add("aprobada");
+    materia.classList.toggle('aprobada');
+    materia.classList.remove('pendiente');
+    actualizarBloqueos();
   });
 });
+
+actualizarBloqueos();
