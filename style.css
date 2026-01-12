@@ -4,10 +4,26 @@ body {
   padding: 20px;
 }
 
+:root {
+  --title: #880d1e;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 40px;
+  color: var(--title);
 }
+
+.year h2 {
+  color: var(--title);
+}
+
+.year h3 {
+  color: var(--title);
+  opacity: 0.85;
+  font-weight: 600;
+}
+
 
 .malla {
   display: flex;
