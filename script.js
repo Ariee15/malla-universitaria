@@ -15,23 +15,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // función para verificar bloqueos
   function actualizarBloqueos() {
-    materias.forEach(materia => {
-      const prereq = materia.dataset.prereq;
-      if (!prereq) return;
+  materias.forEach(materia => {
+    const prereq = materia.dataset.prereq;
+    if (!prereq) return;
 
-      const requisitos = prereq.split(",");
+    const requisitos = prereq.split(",");
 
-      const cumplidos = requisitos.every(req =>
-        document.querySelector(`[data-id="${req.trim()}"]`)?.classList.contains("aprobada")
-      );
+    const cumplidos = requisitos.every(req =>
+      document
+        .querySelector(`[data-id="${req.trim()}"]`)
+        ?.classList.contains("aprobada")
+    );
 
-      if (!cumplidos) {
-        materia.classList.add("bloqueada");
-      } else {
-        materia.classList.remove("bloqueada");
+    const estabaBloqueada = materia.classList.contains("bloqueada");
+
+    if (!cumplidos && !materia.classList.contains("aprobada")) {
+      materia.classList.add("bloqueada");
+    } else {
+      materia.classList.remove("bloqueada");
+
+      // ✨ efecto visual al desbloquear
+      if (estabaBloqueada) {
+        materia.classList.add("desbloqueada");
+
+        setTimeout(() => {
+          materia.classList.remove("desbloqueada");
+        }, 1000);
       }
-    });
-  }
+    }
+  });
+}
 
   actualizarBloqueos();
 
