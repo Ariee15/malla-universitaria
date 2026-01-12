@@ -1,29 +1,59 @@
-const materias = document.querySelectorAll('.materia');
+document.addEventListener("DOMContentLoaded", () => {
+  const materias = document.querySelectorAll(".materia");
 
-function actualizarBloqueos() {
-  materias.forEach(m => {
-    const prereq = m.dataset.prereq;
-    if (!prereq) return;
+  // cargar progreso guardado
+  const aprobadas = JSON.parse(localStorage.getItem("materiasAprobadas")) || [];
 
-    const ids = prereq.split(',');
-    const ok = ids.every(id =>
-      document.querySelector(`[data-id="${id.trim()}"]`)?.classList.contains('aprobada')
-    );
+  materias.forEach(materia => {
+    const id = materia.dataset.id;
 
-    if (!ok && !m.classList.contains('aprobada')) {
-      m.classList.add('bloqueada');
-    } else {
-      m.classList.remove('bloqueada');
+    // restaurar aprobadas
+    if (aprobadas.includes(id)) {
+      materia.classList.add("aprobada");
     }
   });
-}
 
-materias.forEach(m => {
-  m.addEventListener('click', () => {
-    if (m.classList.contains('bloqueada')) return;
-    m.classList.toggle('aprobada');
-    actualizarBloqueos();
+  // función para verificar bloqueos
+  function actualizarBloqueos() {
+    materias.forEach(materia => {
+      const prereq = materia.dataset.prereq;
+      if (!prereq) return;
+
+      const requisitos = prereq.split(",");
+
+      const cumplidos = requisitos.every(req =>
+        document.querySelector(`[data-id="${req.trim()}"]`)?.classList.contains("aprobada")
+      );
+
+      if (!cumplidos) {
+        materia.classList.add("bloqueada");
+      } else {
+        materia.classList.remove("bloqueada");
+      }
+    });
+  }
+
+  actualizarBloqueos();
+
+  materias.forEach(materia => {
+    materia.addEventListener("click", () => {
+      if (materia.classList.contains("bloqueada")) return;
+
+      materia.classList.toggle("aprobada");
+
+      const id = materia.dataset.id;
+
+      let guardadas = JSON.parse(localStorage.getItem("materiasAprobadas")) || [];
+
+      if (materia.classList.contains("aprobada")) {
+        if (!guardadas.includes(id)) guardadas.push(id);
+      } else {
+        guardadas = guardadas.filter(m => m !== id);
+      }
+
+      localStorage.setItem("materiasAprobadas", JSON.stringify(guardadas));
+
+      actualizarBloqueos();
+    });
   });
 });
-
-actualizarBloqueos();
