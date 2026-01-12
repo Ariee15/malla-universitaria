@@ -27,21 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.classList.contains("aprobada")
     );
 
-    const estabaBloqueada = materia.classList.contains("bloqueada");
-
-    if (!cumplidos && !materia.classList.contains("aprobada")) {
+    if (!cumplidos) {
       materia.classList.add("bloqueada");
+      materia.classList.remove("desbloqueada");
     } else {
-      materia.classList.remove("bloqueada");
-
-      // ✨ efecto visual al desbloquear
-      if (estabaBloqueada) {
+      // SOLO marcar como desbloqueada si antes estaba bloqueada
+      if (materia.classList.contains("bloqueada")) {
         materia.classList.add("desbloqueada");
 
+        // quitar el efecto después de un rato (estético)
         setTimeout(() => {
           materia.classList.remove("desbloqueada");
-        }, 1000);
+        }, 900);
       }
+
+      materia.classList.remove("bloqueada");
     }
   });
 }
