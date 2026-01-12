@@ -17,7 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function actualizarBloqueos() {
   materias.forEach(materia => {
     const prereq = materia.dataset.prereq;
-    if (!prereq) return;
+
+    // materias sin prerequisitos nunca se bloquean
+    if (!prereq) {
+      materia.classList.remove("bloqueada", "desbloqueada");
+      return;
+    }
 
     const requisitos = prereq.split(",");
 
@@ -28,11 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (!cumplidos) {
+      // 🔒 BLOQUEADA = bloqueada y SIN desbloqueada
       materia.classList.add("bloqueada");
       materia.classList.remove("desbloqueada");
     } else {
+      // 🔓 desbloqueo visual SOLO si no está aprobada
       materia.classList.remove("bloqueada");
-      materia.classList.add("desbloqueada");
+
+      if (!materia.classList.contains("aprobada")) {
+        materia.classList.add("desbloqueada");
+
+        setTimeout(() => {
+          materia.classList.remove("desbloqueada");
+        }, 900);
+      }
     }
   });
 }
