@@ -1,55 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
   const materias = document.querySelectorAll(".materia");
-
-  // cargar progreso guardado
   const aprobadas = JSON.parse(localStorage.getItem("materiasAprobadas")) || [];
 
   materias.forEach(materia => {
-    const id = materia.dataset.id;
-
-    // restaurar aprobadas
-    if (aprobadas.includes(id)) {
+    if (aprobadas.includes(materia.dataset.id)) {
       materia.classList.add("aprobada");
     }
   });
 
-  // función para verificar bloqueos
   function actualizarBloqueos() {
-  materias.forEach(materia => {
-    const prereq = materia.dataset.prereq;
+    materias.forEach(materia => {
+      const prereq = materia.dataset.prereq;
 
-    // materias sin prerequisitos nunca se bloquean
-    if (!prereq) {
-      materia.classList.remove("bloqueada", "desbloqueada");
-      return;
-    }
+      // 🔒 SI TIENE PREREQUISITOS
+      if (prereq) {
+        const requisitos = prereq.split(",");
 
-    const requisitos = prereq.split(",");
+        const cumplidos = requisitos.every(req =>
+          document
+            .querySelector(`[data-id="${req.trim()}"]`)
+            ?.classList.contains("aprobada")
+        );
 
-    const cumplidos = requisitos.every(req =>
-      document
-        .querySelector(`[data-id="${req.trim()}"]`)
-        ?.classList.contains("aprobada")
-    );
-
-    if (!cumplidos) {
-      // 🔒 BLOQUEADA = bloqueada y SIN desbloqueada
-      materia.classList.add("bloqueada");
-      materia.classList.remove("desbloqueada");
-    } else {
-      // 🔓 desbloqueo visual SOLO si no está aprobada
-      materia.classList.remove("bloqueada");
-
-      if (!materia.classList.contains("aprobada")) {
-        materia.classList.add("desbloqueada");
-
-        setTimeout(() => {
-          materia.classList.remove("desbloqueada");
-        }, 900);
+        if (!cumplidos) {
+          materia.classList.remove("aprobada", "desbloqueada");
+          materia.classList.add("bloqueada");
+          return;
+        }
       }
-    }
-  });
-}
+
+      // 🔓 SI LLEGÓ AQUÍ, NO ESTÁ BLOQUEADA
+      materia.classList.remove("bloqueada");
+    });
+  }
 
   actualizarBloqueos();
 
@@ -59,9 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       materia.classList.toggle("aprobada");
 
-      const id = materia.dataset.id;
-
       let guardadas = JSON.parse(localStorage.getItem("materiasAprobadas")) || [];
+      const id = materia.dataset.id;
 
       if (materia.classList.contains("aprobada")) {
         if (!guardadas.includes(id)) guardadas.push(id);
@@ -70,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       localStorage.setItem("materiasAprobadas", JSON.stringify(guardadas));
-
       actualizarBloqueos();
     });
   });
