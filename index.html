@@ -8,11 +8,11 @@
 
 <body>
 
-<h1>Malla Universitaria</h1>
+<h1>Malla Universitaria – Desarrollo y Gestión de Software</h1>
 
-<h2>Primer Año</h2>
+<!-- ================= I AÑO ================= -->
+<h2>I Año – I Semestre</h2>
 <div class="malla">
-
   <div class="materia pendiente" data-id="tic">
     <strong>Tecnología de Información y Comunicación</strong><br>
     Créditos: 4<br>
@@ -37,41 +37,146 @@
     Prerrequisito: Seminario de Inducción
   </div>
 
-  <div class="materia pendiente" data-id="com">
+  <div class="materia pendiente">
     <strong>Comunicación Oral y Escrita</strong><br>
     Créditos: 2<br>
     Prerrequisito: Seminario de Inducción
   </div>
 
-  <div class="materia pendiente" data-id="dp">
+  <div class="materia pendiente">
     <strong>Desarrollo Personal</strong><br>
     Créditos: 2<br>
     Prerrequisito: Seminario de Inducción
   </div>
+</div>
 
-  <div class="materia pendiente" data-id="tel">
+<h2>I Año – II Semestre</h2>
+<div class="malla">
+  <div class="materia pendiente">
     <strong>Trabajo en Equipo y Liderazgo</strong><br>
     Créditos: 3<br>
     Prerrequisito: Desarrollo Personal
   </div>
 
+  <div class="materia pendiente" data-id="fm2" data-prereq="fm1">
+    <strong>Fundamentos de Matemática II</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: Fundamentos de Matemática I
+  </div>
+
+  <div class="materia pendiente" data-id="ds2" data-prereq="ds1">
+    <strong>Desarrollo de Software II</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: Desarrollo de Software I
+  </div>
+
+  <div class="materia pendiente" data-id="ed1" data-prereq="ds1">
+    <strong>Estructura de Datos I</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: Desarrollo de Software I
+  </div>
+
+  <div class="materia pendiente" data-id="ing2" data-prereq="ing1">
+    <strong>Inglés II</strong><br>
+    Créditos: 2<br>
+    Prerrequisito: Inglés I
+  </div>
+
+  <div class="materia pendiente" data-id="bd1">
+    <strong>Base de Datos I</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: Según plan
+  </div>
 </div>
 
-<h2>Segundo Año</h2>
+<h2>I Año – Verano</h2>
 <div class="malla">
+  <div class="materia pendiente">
+    <strong>Geografía de Panamá</strong><br>
+    Créditos: 3<br>
+    Prerrequisito: Ninguno
+  </div>
 
-  <div class="materia pendiente" data-id="ds3">
+  <div class="materia pendiente">
+    <strong>Ética Profesional</strong><br>
+    Créditos: 2<br>
+    Prerrequisito: Ninguno
+  </div>
+</div>
+
+<!-- ================= II AÑO ================= -->
+<h2>II Año – I Semestre</h2>
+<div class="malla">
+  <div class="materia pendiente" data-id="ds3" data-prereq="ds2,bd1">
     <strong>Desarrollo de Software III</strong><br>
     Créditos: 4<br>
-    Prerrequisito: Desarrollo de Software II, Base de Datos I
+    Prerrequisito: DS II, BD I
   </div>
 
-  <div class="materia pendiente" data-id="fm3">
+  <div class="materia pendiente" data-id="fm3" data-prereq="fm2">
     <strong>Fundamentos de Matemática III</strong><br>
     Créditos: 4<br>
-    Prerrequisito: Fundamentos de Matemática II
+    Prerrequisito: FM II
   </div>
 
+  <div class="materia pendiente" data-id="ui" data-prereq="ds2">
+    <strong>Diseño de Interfaces de Usuario</strong><br>
+    Créditos: 3<br>
+    Prerrequisito: DS II
+  </div>
+
+  <div class="materia pendiente" data-id="ed2" data-prereq="ed1">
+    <strong>Estructura de Datos II</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: ED I
+  </div>
+
+  <div class="materia pendiente" data-id="bd2" data-prereq="ed1,bd1">
+    <strong>Base de Datos II</strong><br>
+    Créditos: 4<br>
+    Prerrequisito: ED I, BD I
+  </div>
+</div>
+
+<h2>II Año – II Semestre</h2>
+<div class="malla">
+  <div class="materia pendiente">
+    <strong>Desarrollo de Software IV</strong><br>
+    Créditos: 4
+  </div>
+
+  <div class="materia pendiente">
+    <strong>Ingeniería de Software Aplicada I</strong><br>
+    Créditos: 4
+  </div>
+
+  <div class="materia pendiente">
+    <strong>Desarrollo de Software V</strong><br>
+    Créditos: 4
+  </div>
+
+  <div class="materia pendiente">
+    <strong>Estadística y Probabilidad</strong><br>
+    Créditos: 3
+  </div>
+
+  <div class="materia pendiente">
+    <strong>Organización y Arquitectura de Computadoras I</strong><br>
+    Créditos: 4
+  </div>
+</div>
+
+<h2>II Año – Verano</h2>
+<div class="malla">
+  <div class="materia pendiente">
+    <strong>Ecología General</strong><br>
+    Créditos: 3
+  </div>
+
+  <div class="materia pendiente">
+    <strong>Historia de Panamá</strong><br>
+    Créditos: 3
+  </div>
 </div>
 
 <script src="script.js"></script>
