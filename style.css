@@ -90,7 +90,8 @@ h1 {
 .materia.desbloqueada {
   background: #f4cbc6;
   border: 2px solid #f4afab;
-  animation: glow 0.8s ease;
+  color: #5a1a2b;
+  font-weight: 600;
 }
 
 @keyframes glow {
