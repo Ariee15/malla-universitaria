@@ -47,9 +47,11 @@ h1 {
 
 /* estados */
 .aprobada {
-  background: #c8f7c5;
-  border-color: #4caf50;
+  background: #f49cbb;
+  border: 2px solid #f26a8d;
+  color: #4a0d24;
   text-decoration: line-through;
+  font-weight: 600;
 }
 
 .bloqueada {
