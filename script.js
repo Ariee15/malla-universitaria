@@ -31,17 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       materia.classList.add("bloqueada");
       materia.classList.remove("desbloqueada");
     } else {
-      // SOLO marcar como desbloqueada si antes estaba bloqueada
-      if (materia.classList.contains("bloqueada")) {
-        materia.classList.add("desbloqueada");
-
-        // quitar el efecto después de un rato (estético)
-        setTimeout(() => {
-          materia.classList.remove("desbloqueada");
-        }, 900);
-      }
-
       materia.classList.remove("bloqueada");
+      materia.classList.add("desbloqueada");
     }
   });
 }
