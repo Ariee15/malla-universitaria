@@ -9,10 +9,13 @@ body {
 }
 
 h1,
-.year h2,
+.year h2 {
+  text-align: center;
+}
 .year h3 {
   color: var(--title);
   font-weight: 700;
+   text-align: center;
 }
 
 .pensum {
